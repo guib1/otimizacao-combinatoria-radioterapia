@@ -1,0 +1,11 @@
+*.Rhistory
+*.aux
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+Prazo = 16-11 lista e 23-11 Tecnica usada no GUIA
+GUIA_ESTUDO_tema05.md
+trabalho-tema-4-radioterapia.pdf
+.agents/
+*.log
+skills-lock.json
