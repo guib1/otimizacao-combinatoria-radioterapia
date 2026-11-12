@@ -757,4 +757,119 @@ A dose ótima no tecido sadio diminui conforme o limite pulmonar
  corresponde à redução do ganho por Gy adicional permitido no pulmão,
  de $0{,}40$ para aproximadamente $0{,}1111111$ Gy.
 
+\clearpage
+\section*{Tarefa 6 -- A medula e a dose no tumor}
+
+\subsection*{Item (a)}
+
+\textbf{O limite da medula sobe para 50 Gy. O relatório garante quanto
+se ganha? Rode no LINDO e compare com a conta pelo \textit{dual price}.}
+
+No modelo original, o \textit{dual price} da medula é $+0{,}10$ Gy/Gy.
+Aplicá-lo ao aumento de 45 para 50 Gy daria a estimativa
+\[
+Z_{\text{estimado}}=5{,}50-0{,}10(50-45)=5{,}00\text{ Gy}.
+\]
+Porém, a linha 6 do relatório de sensibilidade original permite um
+aumento de apenas $1{,}666667$ Gy. Assim, o ganho garantido por essa
+taxa é de aproximadamente $0{,}10\times1{,}666667=0{,}166667$ Gy,
+ao elevar o limite até $46{,}666667$ Gy. O relatório não garante que
+a taxa continue válida até 50 Gy.
+
+Alterando apenas o limite da medula para 50 Gy e mantendo o pulmão
+com limite de 20 Gy, o LINDO encontra $Z=5{,}333333$ Gy. O ganho
+efetivo em relação ao plano original é
+\[
+\boxed{5{,}50-5{,}333333=0{,}166667\text{ Gy}}.
+\]
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\linewidth]{lindo tarefa 6 A.png}
+    \caption{Solução ótima com limite de 50 Gy na medula.}
+    \label{fig:tarefa6-a}
+\end{figure}
+
+Na nova solução, a medula apresenta folga de $3{,}333333$ Gy na
+linha 6, recebendo apenas $46{,}666667$ Gy. Já o centro do tumor
+atinge o máximo de 66 Gy, com folga zero na linha 5. Portanto,
+permitir 50 Gy na medula não produz ganho adicional além daquele
+obtido ao chegar a $46{,}666667$ Gy, pois o limite do centro passa
+a restringir a melhora.
+
+\subsection*{Item (b)}
+
+\textbf{E se o limite da medula fosse 25 Gy?}
+
+Reduzir o limite da medula de 45 para 25 Gy representa uma diminuição
+de 20 Gy. A coluna \texttt{Allowable Decrease} da linha 6 do relatório
+original permite apenas $18{,}33333$ Gy. Portanto, o
+\textit{dual price} original não pode ser usado para calcular o
+resultado dessa alteração completa.
+
+Ao resolver novamente o modelo com a medula limitada a 25 Gy e o
+pulmão a 20 Gy, o LINDO apresenta \texttt{Infeasible} e a mensagem
+\texttt{No feasible solution found}. Nenhuma combinação dos quatro
+feixes consegue atender simultaneamente às doses exigidas no tumor
+e aos limites desses dois órgãos. Assim, o plano é inviável nas
+condições propostas. O valor 5 exibido em \texttt{Objective}
+corresponde a uma tentativa que viola restrições e não constitui
+uma solução válida.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\linewidth]{lindo tarefa 6 B.png}
+    \caption{Inviabilidade do modelo com limite de 25 Gy na medula.}
+    \label{fig:tarefa6-b}
+\end{figure}
+
+\subsection*{Item (c)}
+
+\textbf{O radioterapeuta quer subir a dose mínima no tumor (borda e
+centro) para 62 Gy, mantendo o máximo de 66 Gy. Estime pelo relatório
+e rode no LINDO. Por que o resultado é pior que a estimativa?}
+
+No relatório original, o \textit{dual price} da dose mínima na borda
+é $-0{,}30$, e o da dose mínima no centro é zero. Para um aumento
+de 2 Gy em cada mínimo, a estimativa é
+\[
+Z_{\text{estimado}}=5{,}50-(-0{,}30)(2)-(0)(2)
+=\boxed{6{,}10\text{ Gy}}.
+\]
+Ao resolver o modelo com os dois mínimos em 62 Gy, mantendo a medula
+em até 45 Gy e o pulmão em até 20 Gy, o LINDO encontra
+$Z=6{,}466667$ Gy. A dose média no tecido sadio fica, portanto,
+$6{,}466667-6{,}10=\mathbf{0{,}366667}$ Gy acima da estimativa.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\linewidth]{lindo tarefa 6 C.png}
+    \caption{Solução com doses mínimas de 62 Gy na borda e no centro do tumor.}
+    \label{fig:tarefa6-c}
+\end{figure}
+
+A estimativa usa as taxas da solução original, mas elas não permanecem
+válidas durante todo o aumento. Conforme calculado na Tarefa 3, ao
+aumentar a exigência na borda em $0{,}625$ Gy, o centro já atinge seu
+máximo de 66 Gy. Elevar também o mínimo do centro não altera esse
+obstáculo, pois a dose recebida já é superior ao novo mínimo de 62 Gy.
+
+Para continuar elevando a dose na borda sem ultrapassar 66 Gy no
+centro, o programa precisa ajustar os feixes com um custo maior.
+Isso aparece no novo relatório, em que o \textit{dual price} da
+linha 2 passa de $-0{,}30$ para aproximadamente $-0{,}566667$.
+A linha 5 tem folga zero, confirmando que o centro está no máximo,
+enquanto a linha 4 tem folga de 4 Gy em relação ao mínimo de 62 Gy.
+Por isso, o resultado é pior que a estimativa inicial.
+
+\section*{Tarefa 7 -- A recomendação}
+
+\noindent
+O limite pulmonar mais encarece o plano, com custo marginal de $0{,}40$ Gy/Gy.\\
+O feixe C fica de fora pela alta dose no pulmão, que supera seu benefício no tumor.\\
+Proteger mais um pulmão frágil aumenta a dose média mínima no tecido sadio.\\
+Abaixo de $13{,}93$ Gy no pulmão, aproximadamente, o modelo torna-se inviável.\\
+O PPL não decide quais riscos clínicos são aceitáveis nem se o tratamento deve\\
+ser realizado. Essas decisões cabem à equipe médica.
+
 \end{document}
