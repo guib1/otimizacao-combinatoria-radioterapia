@@ -297,7 +297,7 @@ Sujeito a:
     \label{fig:solucao-tarefa2}
 \end{figure}
 
-\subsection*{Item (a) -- Intensidades dos feixes}
+\subsection*{Item (a)}
 
 \textbf{Qual a intensidade de cada feixe? Que feixe não é usado?}
 
@@ -310,7 +310,7 @@ tem intensidade $17{,}5$.
 \textbf{O feixe lateral esquerdo (C) não é usado}, pois sua intensidade
 ótima é zero.
 
-\subsection*{Item (b) -- Doses e exigências no limite}
+\subsection*{Item (b)}
 
 \textbf{Calcule a dose em cada região. Quais exigências estão no limite?
 Confira com a coluna \texttt{SLACK OR SURPLUS}.}
@@ -368,34 +368,34 @@ $5{,}5$ Gy acima do mínimo e $0{,}5$ Gy abaixo do máximo.
 
 Como o problema é de minimização, melhorar o resultado significa diminuir
 a dose média no tecido sadio. No plano original, essa dose é de $5{,}50$ Gy.
-A coluna \texttt{Dual Price} do relatório indica quanto o resultado melhora
+A coluna \textit{dual price} do relatório indica quanto o resultado melhora
 quando aumentamos em uma unidade o limite de uma restrição, mantendo os
 demais limites fixos. Neste modelo, essa unidade é 1 Gy.
 
-Um preço dual positivo representa um ganho. Por exemplo, o preço dual da
+Um \textit{dual price} positivo representa um ganho. Por exemplo, o \textit{dual price} da
 medula é $+0{,}10$. Ao aumentar seu limite de 45 para 46 Gy, a dose média
 mínima no tecido sadio diminui de $5{,}50$ para $5{,}40$ Gy. Portanto,
-o preço dual é positivo, mas a mudança na função objetivo é negativa,
+o \textit{dual price} é positivo, mas a mudança na função objetivo é negativa,
 \[
 \Delta Z=5{,}40-5{,}50=-0{,}10\text{ Gy}.
 \]
 Isso é uma melhora, pois conseguimos uma dose menor no tecido sadio.
 
-Um preço dual negativo indica o efeito contrário. Na restrição da borda,
+Um \textit{dual price} negativo indica o efeito contrário. Na restrição da borda,
 o valor $-0{,}30$ significa que exigir mais dose nessa região aumenta a
 dose média mínima no tecido sadio à taxa de $0{,}30$ Gy por Gy adicional
-exigido. Assim, para um aumento do limite, um preço dual positivo reduz
-o valor mínimo da função objetivo e um preço dual negativo aumenta esse valor.
+exigido. Assim, para um aumento do limite, um \textit{dual price} positivo reduz
+o valor mínimo da função objetivo e um \textit{dual price} negativo aumenta esse valor.
 
 Essas taxas valem dentro do intervalo de sensibilidade, alterando um
 limite por vez. Esse intervalo informa até quanto podemos modificar
-o limite usando o mesmo preço dual. A mudança completa de 1 Gy na borda
+o limite usando o mesmo \textit{dual price}. A mudança completa de 1 Gy na borda
 ultrapassa esse intervalo, como explicado no item (a).
 
 \begin{center}
 \begin{tabular}{clr}
 \toprule
-\textbf{Linha} & \textbf{Limite alterado} & \textbf{Preço dual (Gy/Gy)} \\
+\textbf{Linha} & \textbf{Limite alterado} & \textbf{\textit{dual price} (Gy/Gy)} \\
 \midrule
 2 & Dose mínima na borda do tumor & $-0{,}30$ \\
 6 & Dose máxima na medula espinhal & $+0{,}10$ \\
@@ -404,17 +404,17 @@ ultrapassa esse intervalo, como explicado no item (a).
 \end{tabular}
 \end{center}
 
-\subsection*{Item (a) -- Aumento da dose mínima na borda}
+\subsection*{Item (a)}
 
 \textbf{Quanto custa, em dose média no tecido sadio, 1 Gy a mais de
  dose mínima na borda do tumor?}
 
 Elevar a dose mínima na borda de 60 para 61 Gy aumenta a dose média
-no tecido sadio. O preço dual da linha 2, $-0{,}30$, indica uma taxa
+no tecido sadio. O \textit{dual price} da linha 2, $-0{,}30$, indica uma taxa
 inicial de $0{,}30$ Gy por Gy adicional exigido. Por essa taxa, a dose
 no tecido sadio passaria de $5{,}50$ para $5{,}80$ Gy.
 
-Essa estimativa depende do intervalo de validade do preço dual.
+Essa estimativa depende do intervalo de validade do \textit{dual price}.
 Neste caso, o centro do tumor já recebe $65{,}5$ Gy e só pode chegar
 a 66 Gy. Para determinar até quando a taxa vale, calculamos o aumento
 na borda que consome essa folga de $0{,}5$ Gy.
@@ -448,7 +448,7 @@ Como essa dose deve ser menor ou igual a 66 Gy,
 t\leq\frac{0{,}5}{0{,}8}=\boxed{0{,}625\text{ Gy}}.
 \]
 As demais restrições continuam satisfeitas até esse ponto. Assim,
-o preço dual original vale até a exigência na borda chegar a
+o \textit{dual price} original vale até a exigência na borda chegar a
 $60+0{,}625=60{,}625$ Gy. Nesse ponto, o centro atinge seu máximo
 de 66 Gy. Para aumentar ainda mais a dose na borda, é necessário
 ajustar os feixes de outra maneira, e a taxa de custo muda.
@@ -473,7 +473,7 @@ contrário, reduzindo essa exigência. Os testes realizados no LINDO
 confirmaram a redução de $Z$. O próprio relatório permite explicar
 esse comportamento. Na linha 2, a coluna \texttt{Allowable Decrease}
 indica que o limite pode diminuir em até $2{,}1875$ Gy mantendo o
-preço dual original. Assim, reduzir a dose mínima na borda de 60 para
+\textit{dual price} original. Assim, reduzir a dose mínima na borda de 60 para
 59 Gy, mantendo os demais limites fixos, reduz a dose média no tecido
 sadio em $0{,}30$ Gy,
 \[
@@ -482,30 +482,29 @@ Z=5{,}50-0{,}30=5{,}20\text{ Gy}.
 Essa melhora no objetivo depende de aceitar uma exigência menor de
 dose na borda do tumor, alterando o requisito original do problema.
 
-\subsection*{Item (b) -- Afrouxamento dos limites dos órgãos}
+\subsection*{Item (b)}
 
 \textbf{Quanto se ganha afrouxando o limite da medula em 1 Gy?
 E o do pulmão?}
 
-Afrouxar o limite significa permitir mais dose no órgão. Como os preços
- duais das linhas 6 e 7 são positivos, esse aumento permite reduzir a
+Afrouxar o limite significa permitir mais dose no órgão. Como os \textit{dual price} das linhas 6 e 7 são positivos, esse aumento permite reduzir a
  dose média mínima no tecido sadio. Consideramos cada mudança
  separadamente, mantendo os demais limites do modelo original.
 
-Na medula, o preço dual da linha 6 é $+0{,}10$ Gy/Gy. Aumentar o limite
+Na medula, o \textit{dual price} da linha 6 é $+0{,}10$ Gy/Gy. Aumentar o limite
  de 45 para 46 Gy proporciona um ganho de \textbf{0,10 Gy} no tecido sadio,
  cuja dose média passa a
 \[
 Z=5{,}50-0{,}10(1)=\boxed{5{,}40\text{ Gy}}.
 \]
-No pulmão, o preço dual da linha 7 é $+0{,}40$ Gy/Gy. Aumentar o limite
+No pulmão, o \textit{dual price} da linha 7 é $+0{,}40$ Gy/Gy. Aumentar o limite
  de 20 para 21 Gy proporciona um ganho de \textbf{0,40 Gy} no tecido sadio,
  cuja dose média passa a
 \[
 Z=5{,}50-0{,}40(1)=\boxed{5{,}10\text{ Gy}}.
 \]
 
-\subsection*{Item (c) -- Escolha do limite e validade do ganho}
+\subsection*{Item (c)}
 
 \textbf{Se o médico pudesse negociar 1 Gy em um dos dois limites,
 qual escolheria? Até quantos Gy essa conta vale?}
@@ -521,9 +520,241 @@ Para saber até quando essa taxa vale, consultamos a linha 7 da análise
 \[
 20+1{,}346154\approx\boxed{21{,}3462\text{ Gy}}.
 \]
-Portanto, podemos usar o mesmo preço dual para um aumento total de até
+Portanto, podemos usar o mesmo \textit{dual price} para um aumento total de até
 \textbf{1,3462 Gy}, mantendo os demais limites fixos. Nesse ponto, o
 feixe D chega à intensidade zero. Para aumentos maiores, é necessário
 resolver novamente o modelo para determinar o novo ganho.
+
+\clearpage
+\section*{Tarefa 4 -- O feixe que ficou de fora}
+
+\subsection*{Item (a)}
+
+\textbf{O \texttt{REDUCED COST} do feixe C é $0{,}15$, maior que seu
+próprio coeficiente ($0{,}08$). Que melhoria no tecido sadio faria
+o feixe C entrar no plano?}
+
+Como o problema é de minimização, o custo reduzido de $0{,}15$ indica
+quanto o coeficiente de C na função objetivo precisa diminuir para
+que esse feixe possa participar de uma solução ótima. O coeficiente
+atual é $0{,}08$ Gy no tecido sadio por unidade de intensidade.
+Portanto, ele precisaria chegar a
+\[
+0{,}08-0{,}15=\boxed{-0{,}07\text{ Gy por unidade de intensidade}}.
+\]
+Nesse valor, C pode entrar em uma solução ótima alternativa. Abaixo
+dele, seu uso passa a ser vantajoso. Isso exigiria que o feixe reduzisse
+a dose no tecido sadio, algo incompatível com a deposição de dose
+representada pelo modelo. Mesmo reduzir seu coeficiente a zero
+seria insuficiente.
+
+\subsection*{Item (b)}
+
+\textbf{Decomponha o $0{,}15$ usando a coluna de C e os \textit{dual price}.
+Quanto vale a dose entregue à borda e quanto custam as doses na
+medula e no pulmão? Qual é o verdadeiro obstáculo do feixe C?}
+
+Cada unidade de intensidade de C entrega $0{,}9$ Gy à borda e deposita
+$0{,}2$ Gy na medula, $0{,}8$ Gy no pulmão e $0{,}08$ Gy no tecido
+sadio. Usando os \textit{dual price}, expressamos os benefícios e custos
+em dose média equivalente no tecido sadio por unidade de intensidade de C.
+
+\begin{center}
+\begin{tabular}{llr}
+\toprule
+\textbf{Contribuição} & \textbf{Cálculo} & \textbf{Efeito (Gy/unidade)} \\
+\midrule
+Benefício na borda & $0{,}9\times0{,}30$ & $-0{,}27$ \\
+Custo na medula & $0{,}2\times0{,}10$ & $+0{,}02$ \\
+Custo no pulmão & $0{,}8\times0{,}40$ & $+0{,}32$ \\
+Dose direta no tecido sadio & $0{,}08$ & $+0{,}08$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+O benefício na borda é subtraído porque essa dose ajuda a cumprir a
+exigência mínima do tumor. As doses na medula e no pulmão consomem
+limites já atingidos e entram como custos. As demais restrições têm
+\textit{dual price} zero. Assim,
+\[
+\text{Custo reduzido de C}
+=0{,}08-0{,}27+0{,}02+0{,}32
+=\boxed{0{,}15\text{ Gy por unidade de intensidade}}.
+\]
+
+O principal obstáculo é a \textbf{dose depositada no pulmão}.
+Seu custo equivalente de $0{,}32$ Gy já supera o benefício de
+$0{,}27$ Gy na borda. Somados os custos da medula e do tecido sadio,
+o feixe C piora o valor da função objetivo.
+
+\clearpage
+\section*{Tarefa 5 -- Um pulmão frágil}
+
+\subsection*{Item (a)}
+
+\textbf{Com limite de 18 Gy e de 15 Gy, qual a dose média no tecido
+sadio? Use só o relatório.}
+
+Na linha 7 do relatório, o limite pulmonar original é 20 Gy e o
+\textit{dual price} é $+0{,}40$. Portanto, reduzir esse limite aumenta
+a dose média mínima no tecido sadio em $0{,}40$ Gy por Gy retirado
+do limite pulmonar, mantendo as demais exigências fixas.
+
+A coluna \texttt{Allowable Decrease} da
+Figura~\ref{fig:tarefa3-range} permite uma redução de até
+$6{,}071429$ Gy. As reduções para 18 Gy e 15 Gy são de 2 Gy e
+5 Gy, respectivamente, e estão dentro desse intervalo. Assim,
+podemos usar o relatório original, sem resolver novamente o modelo.
+
+Para o limite de \textbf{18 Gy}, a dose média no tecido sadio é
+\[
+Z=5{,}50+0{,}40(20-18)=\boxed{6{,}30\text{ Gy}}.
+\]
+Para o limite de \textbf{15 Gy}, essa dose passa a ser
+\[
+Z=5{,}50+0{,}40(20-15)=\boxed{7{,}50\text{ Gy}}.
+\]
+
+\subsection*{Item (b)}
+
+\textbf{Com 12 Gy, o que o LINDO responde? O que isso significa para
+o tratamento?}
+
+Ao reduzir o limite pulmonar para 12 Gy, o programa apresenta o estado
+\texttt{Infeasible} e a mensagem \texttt{No feasible solution found}.
+Isso significa que nenhuma combinação dos quatro feixes atende
+simultaneamente às doses exigidas no tumor, ao limite de 45 Gy na
+medula e ao limite de 12 Gy no pulmão. Portanto, o plano de tratamento
+é inviável nas condições desse modelo.
+
+O valor $8{,}25$ exibido em \texttt{Objective} pertence a uma tentativa
+que viola restrições e não representa a dose de um plano viável.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\linewidth]{Lindo tarefa 5 no feasible.png}
+\caption{Execução do modelo PPL no LINDO com limite de 12 Gy no pulmão.
+O programa indica que não há solução viável.}
+\label{fig:lindo-tarefa-5-nofeasible}
+\end{figure}
+
+\subsection*{Item (c)}
+
+\textbf{Qual a menor dose no pulmão com que ainda se trata o tumor
+(60 Gy, medula até 45 Gy)? Monte e resolva no LINDO o PPL que responde
+a essa pergunta.}
+
+Para descobrir a menor dose média possível no pulmão, usamos os
+coeficientes da linha do pulmão na tabela do enunciado para montar
+a nova função objetivo,
+\[
+\min D_{\text{pulmão}}=0{,}3x_A+0{,}1x_B+0{,}8x_C+0{,}1x_D.
+\]
+As variáveis continuam representando as intensidades não negativas
+dos quatro feixes. Mantemos as doses na borda e no centro entre 60 e
+66 Gy, conforme o problema original, e a medula com no máximo 45 Gy.
+Essas restrições garantem que o plano atenda às exigências do tumor
+e da medula enquanto a dose no pulmão é minimizada.
+
+Retiramos a restrição que fixava um máximo para o pulmão, pois agora
+queremos que o programa encontre sua menor dose possível. No LINDO,
+o novo modelo é
+\begin{center}
+\begin{minipage}{0.5\linewidth}
+\begin{verbatim}
+MIN 0.3 XA + 0.1 XB + 0.8 XC + 0.1 XD
+ST
+ 0.6 XA + 0.5 XB + 0.9 XC + 0.4 XD >= 60
+ 0.6 XA + 0.5 XB + 0.9 XC + 0.4 XD <= 66
+ 0.6 XA + 0.6 XB + 0.5 XC + 0.4 XD >= 60
+ 0.6 XA + 0.6 XB + 0.5 XC + 0.4 XD <= 66
+ 0.2 XA + 0.6 XB + 0.2 XC + 0.2 XD <= 45
+END
+\end{verbatim}
+\end{minipage}
+\end{center}
+
+A solução ótima indica que a menor dose média no pulmão é de aproximadamente 13,93 Gy, 
+respeitando as exigências do tumor e o limite da medula.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\linewidth]{lindo tarefa 5 novo ppl.png}
+\caption{Solução do PPL que minimiza a dose média no pulmão.}
+\label{fig:tarefa5-c}
+\end{figure}
+
+\subsection*{Item (d)}
+
+\textbf{Faça o gráfico da dose média no tecido sadio em função do limite
+do pulmão, desse mínimo até 26 Gy.}
+
+Para construir o gráfico, usamos o modelo original, que minimiza a
+ dose média no tecido sadio, variando apenas o limite pulmonar.
+ Com esse limite em 26 Gy, o LINDO fornece $Z=4{,}444444$ Gy e
+ \textit{dual price} de $0{,}1111111$ na linha 7.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\linewidth]{lindo tarefa 5 D solver.png}
+    \caption{Solução ótima com limite pulmonar de 26 Gy.}
+    \label{fig:tarefa5-d-solver}
+\end{figure}
+
+No relatório original, o limite de 20 Gy pode diminuir em
+$6{,}071429$ Gy ou aumentar em $1{,}346154$ Gy. Nesse intervalo,
+a dose ótima no tecido sadio é calculada por
+\[
+Z(L)=5{,}50-0{,}40(L-20),
+\qquad 13{,}928571\leq L\leq21{,}346154,
+\]
+onde $L$ representa o limite pulmonar, em Gy.
+
+Já no relatório com limite de 26 Gy, a linha 7 apresenta
+\texttt{Allowable Decrease} de $4{,}653846$ Gy. Portanto, o novo
+\textit{dual price} vale desde $26-4{,}653846=21{,}346154$ Gy,
+ligando-se ao primeiro intervalo. Para esse segundo trecho,
+\[
+Z(L)\approx4{,}444444+0{,}1111111(26-L),
+\qquad21{,}346154\leq L\leq26.
+\]
+Os valores estão arredondados conforme os relatórios.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\linewidth]{lindo tarefa 5 D range report.png}
+    \caption{Análise de sensibilidade com limite pulmonar de 26 Gy.}
+    \label{fig:tarefa5-d-range}
+\end{figure}
+
+Como cada intervalo tem uma taxa constante, o gráfico é formado por
+ dois segmentos de reta. Os extremos usados são
+\begin{center}
+\begin{tabular}{rr}
+\toprule
+\textbf{Limite pulmonar (Gy)} & \textbf{Dose ótima no tecido sadio (Gy)} \\
+\midrule
+$13{,}928571$ & $7{,}928571$ \\
+$21{,}346154$ & $4{,}961538$ \\
+$26{,}000000$ & $4{,}444444$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+Os dois primeiros valores de dose foram calculados pela expressão
+ do primeiro trecho, e o último veio da execução com 26 Gy.
+ O script em Python usa o Seaborn apenas para representar esses pontos
+ e ligá-los com segmentos de reta.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{grafico_tarefa5.png}
+    \caption{Dose média mínima no tecido sadio em função do limite pulmonar.}
+    \label{fig:tarefa5-d}
+\end{figure}
+
+A dose ótima no tecido sadio diminui conforme o limite pulmonar
+ aumenta. A mudança de inclinação em aproximadamente $21{,}3462$ Gy
+ corresponde à redução do ganho por Gy adicional permitido no pulmão,
+ de $0{,}40$ para aproximadamente $0{,}1111111$ Gy.
 
 \end{document}
